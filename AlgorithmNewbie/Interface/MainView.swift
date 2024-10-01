@@ -12,12 +12,22 @@ struct MainView: View {
         VStack {
             Text("Hash Table")
                 .font(.title)
+            Button {
+                runPlayground()
+            } label: {
+                Text("Run Playground")
+            }
+
             List {
                 ForEach(0..<26) { index in
                     Text(fruits[index].description)
                 }
             }
         }
+    }
+
+    func runPlayground() {
+        print("Please set a breakpoint")
     }
 }
 
