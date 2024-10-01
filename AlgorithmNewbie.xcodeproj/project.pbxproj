@@ -24,6 +24,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6767DDC92CAC7AF1001605AC /* MyLibrary */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = MyLibrary; sourceTree = "<group>"; };
 		67E738C12CAC6DA200B253AF /* AlgorithmNewbie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AlgorithmNewbie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		67E738D12CAC6DA400B253AF /* AlgorithmNewbieTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AlgorithmNewbieTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		67E738DB2CAC6DA400B253AF /* AlgorithmNewbieUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AlgorithmNewbieUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -75,6 +76,7 @@
 		67E738B82CAC6DA200B253AF = {
 			isa = PBXGroup;
 			children = (
+				6767DDC92CAC7AF1001605AC /* MyLibrary */,
 				67E738C32CAC6DA200B253AF /* AlgorithmNewbie */,
 				67E738D42CAC6DA400B253AF /* AlgorithmNewbieTests */,
 				67E738DE2CAC6DA400B253AF /* AlgorithmNewbieUITests */,
