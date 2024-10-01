@@ -8,8 +8,10 @@
 import Foundation
 
 struct Fruit: CustomStringConvertible {
-    struct ID {
+    struct ID: CustomStringConvertible {
         let rawValue: Int
+
+        var description: String { "\(rawValue)" }
     }
 
     let id: ID
