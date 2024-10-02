@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		6767DDCC2CAC8367001605AC /* Algorithm in Frameworks */ = {isa = PBXBuildFile; productRef = 6767DDCB2CAC8367001605AC /* Algorithm */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		67E738D22CAC6DA400B253AF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -53,6 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6767DDCC2CAC8367001605AC /* Algorithm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -73,6 +78,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6767DDCA2CAC8367001605AC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		67E738B82CAC6DA200B253AF = {
 			isa = PBXGroup;
 			children = (
@@ -80,6 +92,7 @@
 				67E738C32CAC6DA200B253AF /* AlgorithmNewbie */,
 				67E738D42CAC6DA400B253AF /* AlgorithmNewbieTests */,
 				67E738DE2CAC6DA400B253AF /* AlgorithmNewbieUITests */,
+				6767DDCA2CAC8367001605AC /* Frameworks */,
 				67E738C22CAC6DA200B253AF /* Products */,
 			);
 			sourceTree = "<group>";
@@ -114,6 +127,7 @@
 			);
 			name = AlgorithmNewbie;
 			packageProductDependencies = (
+				6767DDCB2CAC8367001605AC /* Algorithm */,
 			);
 			productName = AlgorithmNewbie;
 			productReference = 67E738C12CAC6DA200B253AF /* AlgorithmNewbie.app */;
@@ -415,7 +429,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = red.welltempe.AlgorithmNewbie;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -445,7 +459,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = red.welltempe.AlgorithmNewbie;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -463,7 +477,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = red.welltempe.AlgorithmNewbieTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AlgorithmNewbie.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/AlgorithmNewbie";
 			};
@@ -482,7 +496,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = red.welltempe.AlgorithmNewbieTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AlgorithmNewbie.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/AlgorithmNewbie";
 			};
@@ -499,7 +513,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = red.welltempe.AlgorithmNewbieUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = AlgorithmNewbie;
 			};
@@ -516,7 +530,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = red.welltempe.AlgorithmNewbieUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = AlgorithmNewbie;
 			};
@@ -562,6 +576,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		6767DDCB2CAC8367001605AC /* Algorithm */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Algorithm;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 67E738B92CAC6DA200B253AF /* Project object */;
 }
