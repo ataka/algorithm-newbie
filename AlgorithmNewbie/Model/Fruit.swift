@@ -5,13 +5,16 @@
 //  Created by 安宅正之 on 2024/10/02.
 //
 
+import Algorithm
 import Foundation
 
 struct Fruit: CustomStringConvertible {
-    struct ID: CustomStringConvertible {
+    struct ID: CustomStringConvertible, MyHashable {
         let rawValue: Int
 
         var description: String { "\(rawValue)" }
+
+        var hashValue: Int { rawValue }
     }
 
     let id: ID
