@@ -37,7 +37,7 @@ struct MainView: View {
 
     private func runPlayground() {
         print("Please set a breakpoint")
-        tryHashTable2()
+        tryHashTable31()
     }
 
     private func tryHashTable1() {
@@ -80,6 +80,29 @@ struct MainView: View {
         hashTable.remove(for: apple.id)
         puts("\(hashTable.value(for: honeydew.id)!)")
         puts("\(String(describing: hashTable.value(for: apple.id)))")
+    }
+
+    private func tryHashTable31() {
+        let apple = fruits[0]
+        let banana = fruits[1]
+        let candy = fruits[2]
+        let honeydew = fruits[7]
+
+        var hashTable = HashTable31<Fruit.ID, Fruit>()
+        hashTable.set(apple, for: apple.id)
+        hashTable.set(banana, for: banana.id)
+
+        puts("\(hashTable.value(for: apple.id)!)")
+        puts("\(hashTable.value(for: banana.id)!)")
+        puts("\(String(describing: hashTable.value(for: candy.id)))")
+
+        hashTable.set(honeydew, for: honeydew.id)
+        puts("\(hashTable.value(for: honeydew.id)!)")
+        puts("\(hashTable.value(for: apple.id)!)")
+
+        hashTable.remove(for: apple.id)
+        // nil になってはいけない
+        puts("\(String(describing: hashTable.value(for: honeydew.id)))")
     }
 }
 
