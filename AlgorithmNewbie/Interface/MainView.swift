@@ -9,6 +9,8 @@ import SwiftUI
 import Algorithm
 
 struct MainView: View {
+    @State var text: String = ""
+
     var body: some View {
         VStack {
             Text("Hash Table")
@@ -18,6 +20,7 @@ struct MainView: View {
             } label: {
                 Text("Run Playground")
             }
+            Console(text: text)
 
             List {
                 ForEach(0..<26) { index in
@@ -27,9 +30,30 @@ struct MainView: View {
         }
     }
 
-    func runPlayground() {
+    private func puts(_ string: String) {
+        let newLine = text.isEmpty ? "" : "\n"
+        self.text.append(newLine + string)
+    }
+
+    private func runPlayground() {
         print("Please set a breakpoint")
-        print(Origin.value)
+        puts(Origin.value)
+    }
+}
+
+struct Console: View {
+    var text: String
+
+    var body: some View {
+        if !text.isEmpty {
+            Text(text)
+                .font(.system(.body, design: .monospaced))
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding()
+                .background(Color.black.opacity(0.1))
+                .clipShape(RoundedRectangle(cornerRadius: 8))
+                .padding()
+        }
     }
 }
 
