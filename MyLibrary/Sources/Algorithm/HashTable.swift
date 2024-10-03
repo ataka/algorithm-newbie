@@ -188,6 +188,7 @@ public struct HashTable32<Key: MyHashable, Value> {
 
     public mutating func remove(for key: Key) {
         let index = probe(for: key)
+        guard case .exist = storage[index] else { return }
         storage[index] = .deleted
     }
 
