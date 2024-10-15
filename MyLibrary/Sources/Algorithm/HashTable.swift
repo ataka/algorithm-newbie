@@ -45,7 +45,7 @@ public struct HashTable21<Key: MyHashable, Value> {
         let value: Value
     }
     private var storage: [[Bucket]]
-    private var capacitySize: Int = 7
+    public private(set) var capacitySize: Int = 7
 
     public init() {
         storage = Array(repeating: [], count: capacitySize)
@@ -71,6 +71,10 @@ public struct HashTable21<Key: MyHashable, Value> {
             } else {
                 storage[index].append(bucket)
             }
+
+            if shouldExtendStorage(index: index) {
+                extendStorage()
+            }
         } else {
             remove(for: key)
         }
@@ -89,6 +93,25 @@ public struct HashTable21<Key: MyHashable, Value> {
 
     private func getListIndex(for key: Key, andIndex index: Int) -> Int? {
         storage[index].firstIndex { $0.key == key }
+    }
+
+    // MARK: Extend Storage
+
+    private func shouldExtendStorage(index: Int) -> Bool { valueCount(for: index) > limits }
+    private var limits: Int { capacitySize / 2 }
+    private func valueCount(for index: Int) -> Int { storage[index].count }
+
+    private mutating func extendStorage() {
+        capacitySize *= 2
+
+        let tmp = storage
+        storage = Array(repeating: [], count: capacitySize)
+
+        for list in tmp where !list.isEmpty {
+            for bucket in list {
+                set(bucket.value, for: bucket.key)
+            }
+        }
     }
 }
 
