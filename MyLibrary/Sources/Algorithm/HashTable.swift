@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public protocol MyHashable: Equatable { // Equatable は HashTable21 から必要
     var hashValue: Int { get }
 }
@@ -72,8 +71,8 @@ public struct HashTable21<Key: MyHashable, Value> {
                 storage[index].append(bucket)
             }
 
-            if shouldExtendStorage(index: index) {
-                extendStorage()
+            if shouldExpandStorage(index: index) {
+                expandStorage()
             }
         } else {
             remove(for: key)
@@ -95,13 +94,13 @@ public struct HashTable21<Key: MyHashable, Value> {
         storage[index].firstIndex { $0.key == key }
     }
 
-    // MARK: Extend Storage
+    // MARK: Expand Storage
 
-    private func shouldExtendStorage(index: Int) -> Bool { valueCount(for: index) > limits }
+    private func shouldExpandStorage(index: Int) -> Bool { valueCount(for: index) > limits }
     private var limits: Int { capacitySize / 2 }
     private func valueCount(for index: Int) -> Int { storage[index].count }
 
-    private mutating func extendStorage() {
+    private mutating func expandStorage() {
         capacitySize *= 2
 
         let tmp = storage
@@ -205,8 +204,8 @@ public struct HashTable32<Key: MyHashable, Value> {
             let index = probe(for: key)
             storage[index] = .exist(Bucket(key: key, value: value))
 
-            if shouldExtendStorage {
-                extendStorage()
+            if shouldExpandStorage {
+                expandStorage()
             }
         } else {
             remove(for: key)
@@ -248,9 +247,9 @@ public struct HashTable32<Key: MyHashable, Value> {
         (index + 1) % capacitySize
     }
 
-    // MARK: Extend Storage
+    // MARK: Expand Storage
 
-    private var shouldExtendStorage: Bool { valueCount > limits }
+    private var shouldExpandStorage: Bool { valueCount > limits }
     private var limits: Int { capacitySize / 2 }
     private var valueCount: Int {
         storage.count {
@@ -262,7 +261,7 @@ public struct HashTable32<Key: MyHashable, Value> {
         }
     }
 
-    private mutating func extendStorage() {
+    private mutating func expandStorage() {
         capacitySize *= 2
 
         let tmp = storage
