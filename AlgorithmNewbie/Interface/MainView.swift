@@ -37,7 +37,7 @@ struct MainView: View {
 
     private func runPlayground() {
         print("Please set a breakpoint")
-        tryHashTable2()
+        tryHashTable32()
     }
 
     private func tryHashTable1() {
@@ -138,6 +138,12 @@ struct MainView: View {
         hashTable.remove(for: apple.id)
         puts("\(hashTable.value(for: honeydew.id)!)")
         puts("\(String(describing: hashTable.value(for: apple.id)))")
+
+        // storage サイズを大きくする
+        puts("# Storage !")
+        puts("set 3: \(hashTable.capacitySize)")
+        hashTable.set(apple, for: apple.id)
+        puts("set 4: \(hashTable.capacitySize)")
     }
 }
 

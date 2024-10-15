@@ -188,7 +188,7 @@ public struct HashTable32<Key: MyHashable, Value> {
         case deleted
     }
     private var storage: [State]
-    private var capacitySize: Int = 7
+    public private(set) var capacitySize: Int = 7
 
     public init() {
         storage = Array(repeating: .empty, count: capacitySize)
@@ -204,6 +204,10 @@ public struct HashTable32<Key: MyHashable, Value> {
         if let value {
             let index = probe(for: key)
             storage[index] = .exist(Bucket(key: key, value: value))
+
+            if shouldExtendStorage {
+                extendStorage()
+            }
         } else {
             remove(for: key)
         }
@@ -242,5 +246,30 @@ public struct HashTable32<Key: MyHashable, Value> {
 
     private func nextHashFunction(index: Int) -> Int {
         (index + 1) % capacitySize
+    }
+
+    // MARK: Extend Storage
+
+    private var shouldExtendStorage: Bool { valueCount > limits }
+    private var limits: Int { capacitySize / 2 }
+    private var valueCount: Int {
+        storage.count {
+            switch $0 {
+            case .empty:   false
+            case .exist:   true
+            case .deleted: true
+            }
+        }
+    }
+
+    private mutating func extendStorage() {
+        capacitySize *= 2
+
+        let tmp = storage
+        storage = Array(repeating: .empty, count: capacitySize)
+
+        for case let .exist(bucket) in tmp {
+            set(bucket.value, for: bucket.key)
+        }
     }
 }
