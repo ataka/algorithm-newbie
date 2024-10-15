@@ -37,7 +37,60 @@ struct MainView: View {
 
     private func runPlayground() {
         print("Please set a breakpoint")
-        tryHashTable2()
+        tryHashTable32()
+    }
+
+    private func tryHashTable32() {
+        let apple = fruits[0]
+        let banana = fruits[1]
+        let cherry = fruits[2]
+        let honeydew = fruits[7]
+
+        var hashTable = HashTable32<Fruit.ID, Fruit>()
+        hashTable.set(apple, for: apple.id)
+        hashTable.set(banana, for: banana.id)
+
+        puts("\(hashTable.value(for: apple.id)!)")
+        puts("\(hashTable.value(for: banana.id)!)")
+        puts("\(String(describing: hashTable.value(for: cherry.id)))")
+
+        puts("# Collision")
+        hashTable.set(honeydew, for: honeydew.id)
+        puts("\(hashTable.value(for: honeydew.id)!)")
+        puts("\(hashTable.value(for: apple.id)!)")
+
+        hashTable.remove(for: apple.id)
+        puts("\(hashTable.value(for: honeydew.id)!)")
+
+        puts("Apple: \(String(describing: hashTable.value(for: apple.id)))")
+
+        puts("# Extend Storage")
+        puts("0 capacity size: \(hashTable.capacitySize)")
+        hashTable.set(apple, for: apple.id)
+        puts("1 capacity size: \(hashTable.capacitySize)")
+    }
+
+    private func tryHashTable31() {
+        let apple = fruits[0]
+        let banana = fruits[1]
+        let cherry = fruits[2]
+        let honeydew = fruits[7]
+
+        var hashTable = HashTable31<Fruit.ID, Fruit>()
+        hashTable.set(apple, for: apple.id)
+        hashTable.set(banana, for: banana.id)
+
+        puts("\(hashTable.value(for: apple.id)!)")
+        puts("\(hashTable.value(for: banana.id)!)")
+        puts("\(String(describing: hashTable.value(for: cherry.id)))")
+
+        puts("# Collision")
+        hashTable.set(honeydew, for: honeydew.id)
+        puts("\(hashTable.value(for: honeydew.id)!)")
+        puts("\(hashTable.value(for: apple.id)!)")
+
+        hashTable.remove(for: apple.id)
+        puts("\(String(describing: hashTable.value(for: honeydew.id)))")
     }
 
     private func tryHashTable2() {
@@ -61,6 +114,17 @@ struct MainView: View {
         hashTable.remove(for: apple.id)
         puts("\(hashTable.value(for: honeydew.id)!)")
         puts("\(String(describing: hashTable.value(for: apple.id)))")
+
+        // Extend Storage
+        puts("# Extend Storage")
+        let orange = fruits[14]
+        let vanillaBean = fruits[21]
+        puts("0 capacity size: \(hashTable.capacitySize)")
+        hashTable.set(apple, for: apple.id)
+        hashTable.set(orange, for: orange.id)
+        puts("1 capacity size: \(hashTable.capacitySize)")
+        hashTable.set(vanillaBean, for: vanillaBean.id)
+        puts("2 capacity size: \(hashTable.capacitySize)")
     }
 
     private func tryHashTable1() {

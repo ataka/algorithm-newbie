@@ -34,13 +34,14 @@ public struct HashTable1<Key: MyHashable, Value> {
     }
 }
 
+/// 連鎖法の実装
 public struct HashTable2<Key: MyHashable, Value> {
     private struct Bucket {
         let key: Key
         let value: Value
     }
     private var storage: [[Bucket]]
-    private var capacitySize: Int = 7
+    public private(set) var capacitySize: Int = 7
 
     public init() {
         storage = Array(repeating: [], count: capacitySize)
@@ -66,6 +67,10 @@ public struct HashTable2<Key: MyHashable, Value> {
             } else {
                 storage[index].append(bucket)
             }
+
+            if shouldExtendStorage(index: index) {
+                extendStorage()
+            }
         } else {
             remove(for: key)
         }
@@ -84,5 +89,186 @@ public struct HashTable2<Key: MyHashable, Value> {
 
     private func getListIndex(for key: Key, andIndex index: Int) -> Int? {
         storage[index].firstIndex { $0.key == key }
+    }
+
+    // MARK: Extend Storage
+
+    private func shouldExtendStorage(index: Int) -> Bool {
+        valueCount(for: index) > limit
+    }
+    private var limit: Int { capacitySize / 2 } // 7 -> 3
+    private func valueCount(for index: Int) -> Int { storage[index].count }
+
+    private mutating func extendStorage() {
+        capacitySize *= 2
+
+        let old = storage
+        storage = Array(repeating: [], count: capacitySize)
+
+        for list in old where !list.isEmpty {
+            for bucket in list {
+                set(bucket.value, for: bucket.key)
+            }
+        }
+    }
+}
+
+/// オープンアドレス法の実装
+public struct HashTable31<Key: MyHashable, Value> {
+    private struct Bucket {
+        let key: Key
+        let value: Value
+    }
+
+    private var storage: [Bucket?]
+    private var capacitySize: Int = 7
+
+    public init() {
+        storage = Array<Bucket?>(repeating: nil, count: capacitySize)
+    }
+
+    public func value(for key: Key) -> Value? {
+        let index = probe(for: key)
+        return storage[index]?.value
+    }
+
+    public mutating func set(_ value: Value?, for key: Key) {
+        if let value {
+            let index = probe(for: key)
+            let bucket = Bucket(key: key, value: value)
+            storage[index] = bucket
+        } else {
+            remove(for: key)
+        }
+    }
+
+    public mutating func remove(for key: Key) {
+        let index = probe(for: key)
+        storage[index] = nil
+    }
+
+    private func hashFunction(for key: Key) -> Int {
+        key.hashValue % capacitySize
+    }
+
+    private func nextHashFunction(index: Int) -> Int {
+        (index + 1) % capacitySize
+    }
+
+    // Linear Probe
+    private func probe(for key: Key) -> Int {
+        var index = hashFunction(for: key)
+
+        while true {
+            guard let bucket = storage[index] else { return index }
+            if bucket.key == key {
+                break
+            }
+            index = nextHashFunction(index: index)
+        }
+        return index
+    }
+}
+
+/// オープンアドレス法(.deleted対応版)の実装
+public struct HashTable32<Key: MyHashable, Value> {
+    private struct Bucket {
+        let key: Key
+        let value: Value
+    }
+    private enum State {
+        case empty
+        case exist(Bucket)
+        case deleted
+    }
+
+    private var storage: [State]
+    public private(set) var capacitySize: Int = 7
+
+    public init() {
+        storage = Array<State>(repeating: .empty, count: capacitySize)
+    }
+
+    public func value(for key: Key) -> Value? {
+        let index = probe(for: key)
+        guard case .exist(let bucket) = storage[index] else { return nil }
+        return bucket.value
+    }
+
+    public mutating func set(_ value: Value?, for key: Key) {
+        if let value {
+            let index = probe(for: key)
+            let bucket = Bucket(key: key, value: value)
+            storage[index] = .exist(bucket)
+
+            if shouldExtendStorage {
+                extendStorage()
+            }
+        } else {
+            remove(for: key)
+        }
+    }
+
+    public mutating func remove(for key: Key) {
+        let index = probe(for: key)
+        guard case .exist = storage[index] else { return }
+        storage[index] = .deleted
+    }
+
+    private func hashFunction(for key: Key) -> Int {
+        key.hashValue % capacitySize
+    }
+
+    private func nextHashFunction(index: Int) -> Int {
+        (index + 1) % capacitySize
+    }
+
+    // Linear Probe
+    private func probe(for key: Key) -> Int {
+        var index = hashFunction(for: key)
+
+        while_loop: while true {
+            switch storage[index] {
+            case .empty:
+                return index
+            case .exist(let bucket):
+                if bucket.key == key {
+                    break while_loop
+                }
+            case .deleted:
+                break
+            }
+
+            index = nextHashFunction(index: index)
+        }
+        return index
+    }
+
+    // MARK: Extend Storage
+
+
+    private var shouldExtendStorage: Bool {
+        valueCount > limit
+    }
+    private var limit: Int { capacitySize / 2 } // 7 -> 3
+    private var valueCount: Int {
+        storage.count {
+            switch $0 {
+            case .empty:   false
+            case .exist:   true
+            case .deleted: true
+            }
+        }
+    }
+
+    private mutating func extendStorage() {
+        capacitySize *= 2
+
+        let old = storage
+        storage = Array(repeating: .empty, count: capacitySize)
+
+        for case let .exist(bucket) in old {
+            set(bucket.value, for: bucket.key)
+        }
     }
 }
