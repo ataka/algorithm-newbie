@@ -37,7 +37,7 @@ struct MainView: View {
 
     private func runPlayground() {
         print("Please set a breakpoint")
-        tryHashTable31()
+        tryHashTable32()
     }
 
     private func tryHashTable1() {
@@ -59,6 +59,7 @@ struct MainView: View {
         puts("\(hashTable.value(for: apple.id)!)")
     }
 
+    /// 連鎖法 (Array 版) のテスト
     private func tryHashTable2() {
         let apple = fruits[0]
         let banana = fruits[1]
@@ -80,6 +81,17 @@ struct MainView: View {
         hashTable.remove(for: apple.id)
         puts("\(hashTable.value(for: honeydew.id)!)")
         puts("\(String(describing: hashTable.value(for: apple.id)))")
+
+        // storage サイズを大きくする
+        let orange = fruits[14]
+        let vanillaBean = fruits[21]
+        puts("Storage !")
+        hashTable.set(apple, for: apple.id)
+        hashTable.set(honeydew, for: honeydew.id)
+        hashTable.set(orange, for: orange.id)
+        puts("set 3: \(hashTable.capacitySize)")
+        hashTable.set(vanillaBean, for: vanillaBean.id)
+        puts("set 4: \(hashTable.capacitySize)")
     }
 
     private func tryHashTable31() {
@@ -126,6 +138,12 @@ struct MainView: View {
         hashTable.remove(for: apple.id)
         puts("\(hashTable.value(for: honeydew.id)!)")
         puts("\(String(describing: hashTable.value(for: apple.id)))")
+
+        // storage サイズを大きくする
+        puts("# Storage !")
+        puts("set 3: \(hashTable.capacitySize)")
+        hashTable.set(apple, for: apple.id)
+        puts("set 4: \(hashTable.capacitySize)")
     }
 }
 
