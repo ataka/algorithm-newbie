@@ -31,7 +31,8 @@ struct RecursiveView: View {
 
     private func runPlayground() {
         print("=== Run Playground ===")
-        sum()
+//        sum()
+        isEven()
     }
 
     // MARK: Recursive Funcs
@@ -48,6 +49,20 @@ struct RecursiveView: View {
         puts("recursive: sum(\(number)) = \(recursive.sum(number))")
         puts("tail recursive: sum(\(number)) = \(tailRecursive.sum(number))")
         puts("trampoline recursive: sum(\(number)) = \(trampoline.sum(number))")
+    }
+
+    private func isEven() {
+//        let number = 300_000
+        let number = 99
+        let iteration = MyIteration()
+        let recursive = Recursive()
+        let tailRecursive = TailRecursive()
+        let trampoline = TrampolineRecursive()
+
+        puts("iteration: isEven(\(number)) = \(iteration.isEven(number))")
+        puts("recursive: isEven(\(number)) = \(recursive.isEven(number))")
+        puts("tail recursive: isEven(\(number)) = \(tailRecursive.isEven(number))")
+        puts("trampoline recursive: isEven(\(number)) = \(trampoline.isEven(number))")
     }
 }
 
