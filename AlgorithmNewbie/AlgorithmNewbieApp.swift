@@ -11,7 +11,8 @@ import SwiftUI
 struct AlgorithmNewbieApp: App {
     var body: some Scene {
         WindowGroup {
-            MainView()
+//            MainView()
+            RecursiveView()
         }
     }
 }
