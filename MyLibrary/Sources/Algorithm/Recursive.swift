@@ -200,3 +200,12 @@ public extension TailRecursive {
     }
 }
 
+public extension TrampolineRecursive {
+    func fib(_ n: Int) -> Int {
+        func innerFib(_ n: Int, fibN: Int, fibN_1: Int) -> MyResult<Int> {
+            if n <= 0 { return .done(fibN) }
+            return .call({ innerFib(n - 1, fibN: fibN + fibN_1, fibN_1: fibN) })
+        }
+        return runTrampoline(innerFib(n, fibN: 1, fibN_1: 1))
+    }
+}

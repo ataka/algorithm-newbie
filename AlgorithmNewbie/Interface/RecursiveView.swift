@@ -77,7 +77,7 @@ struct RecursiveView: View {
 //        puts("iteration: isEven(\(number)) = \(iteration.isEven(number))")
         puts("recursive: fib(\(number)) = \(recursive.fib(number))")
         puts("tail recursive: fib1(\(number)) = \(tailRecursive.fib(number))")
-//        puts("trampoline recursive: isEven(\(number)) = \(trampoline.isEven(number))")
+        puts("trampoline recursive: fib(\(number)) = \(trampoline.fib(number))")
     }
 }
 
