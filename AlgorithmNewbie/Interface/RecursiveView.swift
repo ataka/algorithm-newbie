@@ -32,7 +32,8 @@ struct RecursiveView: View {
     private func runPlayground() {
         print("=== Run Playground ===")
 //        sum()
-        isEven()
+//        isEven()
+        fibonacci()
     }
 
     // MARK: Recursive Funcs
@@ -63,6 +64,20 @@ struct RecursiveView: View {
         puts("recursive: isEven(\(number)) = \(recursive.isEven(number))")
         puts("tail recursive: isEven(\(number)) = \(tailRecursive.isEven(number))")
         puts("trampoline recursive: isEven(\(number)) = \(trampoline.isEven(number))")
+    }
+
+    private func fibonacci() {
+        //        let number = 300_000
+        let number = 10
+        let iteration = MyIteration()
+        let recursive = Recursive()
+        let tailRecursive = TailRecursive()
+        let trampoline = TrampolineRecursive()
+
+//        puts("iteration: isEven(\(number)) = \(iteration.isEven(number))")
+        puts("recursive: fib(\(number)) = \(recursive.fib(number))")
+        puts("tail recursive: fib1(\(number)) = \(tailRecursive.fib(number))")
+//        puts("trampoline recursive: isEven(\(number)) = \(trampoline.isEven(number))")
     }
 }
 

@@ -170,3 +170,33 @@ public extension TrampolineRecursive {
         return runTrampoline(innerIsEven(number))
     }
 }
+// MARK: Fibonacci
+
+public extension Recursive {
+    func fib(_ n: Int) -> Int {
+        if n <= 2 { return 1 }
+        return fib(n - 1) + fib(n - 2)
+    }
+}
+
+public extension TailRecursive {
+    // fib(n) = fib(n-1) + fib(n-2)
+    // fib(n+1) = fib(n) + fib(n-1)
+    func fib(_ n: Int) -> Int {
+        func innerFib(_ n: Int, count: Int, fibN: Int, fibN_1: Int) -> Int {
+            if count == n { return fibN_1 }
+            return innerFib(n, count: count + 1, fibN: fibN + fibN_1, fibN_1: fibN)
+        }
+        return innerFib(n, count: 1, fibN: 1, fibN_1: 1)
+    }
+
+    func fib1(_ n: Int) -> Int {
+        // fibN is accumulator
+        func innerFib(_ n: Int, fibN: Int, fibN_1: Int) -> Int {
+            if n <= 0 { return fibN }
+            return innerFib(n - 1, fibN: fibN + fibN_1, fibN_1: fibN)
+        }
+        return innerFib(n, fibN: 1, fibN_1: 1)
+    }
+}
+
